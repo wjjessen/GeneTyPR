@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Developing Data Products</title>
+  <meta name="description" content="">
+  <meta name="author" content="Walter Jessen">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/reveal.min.css">
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/theme/default.css" id="theme">
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/default.css" id="theme">
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->  <link rel="stylesheet" href = "assets/css/ribbons.css">
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class='' data-state='' id='slide-1'>
+  
+  <style>
+.reveal h1 {
+    font-size: 2em;
+    color: #ffffff;
+    text-align: left;
+    padding-bottom: 10px;
+    font-family: Verdana, sans-serif;
+}
+
+.reveal h2 {
+    font-size: 1.5em;
+    color: #ffffff;
+    text-align: left;
+    padding-bottom: 10px;
+    font-family: Verdana, sans-serif;
+}
+
+.reveal p {
+    font-size: 0.75em;
+    color: #ffffff;
+    text-align: left;
+    padding-bottom: 10px;
+    font-family: Verdana, sans-serif;
+}
+
+.reveal span.accent {
+    color: #13DAEC;
+}
+
+.reveal ol {
+    padding-bottom: 20px;
+}
+
+.reveal ol li {
+    font-size: 0.7em;
+    margin-left: 0px;
+    color: #ffffff;
+    text-align: left;
+    padding-bottom: 5px;
+    font-family: Verdana, sans-serif;
+}
+
+img {     
+  width: 700px; 
+  height: 445px;
+}
+</style>
+
+<h1>Developing Data Products</h1>
+
+<h2>Course Project: Gene TyPR</h2>
+
+<hr>
+
+<p><a href="http://www.walterjessen.com">Walter Jessen</a></p>
+
+<p>Bioinformatician </p>
+
+<p>February 26th, 2016</p>
+
+</section>
+<section class='' data-state='' id='slide-2'>
+  <h2>Introduction</h2>
+  <p>This slidify presentation is part of the Course Project for the Coursera Developing Data Products class.</p>
+
+<p><a href="https://www.coursera.org/learn/data-products">https://www.coursera.org/learn/data-products</a></p>
+
+<p>The course project consists of two parts:</p>
+
+<ol>
+<li>Create a Shiny application and deploy it on Rstudio&#39;s shiny server</li>
+<li>Use Slidify or Rstudio Presenter to pitch the app</li>
+</ol>
+
+<p>The app developed for the first part of the assignment is avalilable at:</p>
+
+<p><a href="https://wjjessen.shinyapps.io/GeneTyPR/">https://wjjessen.shinyapps.io/GeneTyPR/</a></p>
+
+<p>Source code for ui.R and server.R files are available on GitHub:</p>
+
+<p><a href="https://github.com/wjjessen/GeneTyPR/">https://github.com/wjjessen/GeneTyPR/</a></p>
+
+<p>The Slidify presentation can be viewed on GitHub:</p>
+
+<p><a href="http://wjjessen.github.io/GeneTyPR/">http://wjjessen.github.io/GeneTyPR/</a></p>
+
+</section>
+<section class='' data-state='' id='slide-3'>
+  <h2>Gene TyPR Pitch</h2>
+  <p>The Gene TyPR app (pronounced &quot;Gene Typer&quot;, an acronym for Gene Type Parser) was developed with several goals in mind:</p>
+
+<ol>
+<li>Download and analyze external data</li>
+<li>Divide output into multiple independently viewable sections</li>
+<li>Allow for user-selected information to be exported</li>
+</ol>
+
+<p>Bioinformatics analysis often involves downloading and integrating public data from sites such as the National Center for Biotechnology Information (NCBI).</p>
+
+<p><a href="http://www.ncbi.nlm.nih.gov/">http://www.ncbi.nlm.nih.gov/</a></p>
+
+<p>The Gene TyPR app was designed to download the latest Homo sapiens gene information (updated nightly) from the NCBI, analyze and display user-selected gene type data, and allow for export.</p>
+
+</section>
+<section class='' data-state='' id='slide-4'>
+  <h2>Gene TyPR data wrangling</h2>
+  <p>The Gene TyPR app subsets the downloaded gene info data based on user-selected gene type. For example, the protein-coding data frame consists of five columns of data:</p>
+
+<pre><code class="r">hs&lt;-readRDS(&quot;hs.R&quot;)
+head(hs[(hs$GeneType==&quot;protein-coding&quot;),],2)
+</code></pre>
+
+<pre><code>##   EntrezGeneID Symbol Chromosome            Description       GeneType
+## 1            1   A1BG         19 alpha-1-B glycoprotein protein-coding
+## 2            2    A2M         12  alpha-2-macroglobulin protein-coding
+</code></pre>
+
+<p>Once a gene type is selected, the app summarizes genes by chromosome and displays:</p>
+
+<ol>
+<li>A barchart plot of gene count per chromosome</li>
+<li>A data table summarizing the gene count per chromosome</li>
+<li>A data table detailing all of the genes for the selected gene type</li>
+</ol>
+
+<p>Data tables can be downloaded as comma-separated values (csv) files.</p>
+
+</section>
+<section class='' data-state='' id='slide-5'>
+  <h2>Gene TyPR Interface</h2>
+  <p>The Gene TyPR app has a tabbed interface that displays a <strong><span class=accent>Plot</span></strong> of the data (barchart), a table summarizing the user-selected gene type <strong><span class=accent>Gene Count</span></strong> per chromosome, and a table providing <strong><span class=accent>Gene Details</span></strong> for the selected gene type. Both data tables can be exported.</p>
+
+<p><img src='assets/img/gene-typr.png'></img></p>
+
+</section>
+    </div>
+  </div>
+</body>
+  <script src="libraries/frameworks/revealjs/lib/js/head.min.js"></script>
+  <script src="libraries/frameworks/revealjs/js/reveal.min.js"></script>
+  <script>
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    theme: Reveal.getQueryHash().theme || 'default', 
+    transition: Reveal.getQueryHash().transition || 'default', 
+    dependencies: [
+    // Cross-browser shim that fully implements classList -
+    // https://github.com/eligrey/classList.js/
+      { src: 'libraries/frameworks/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList;}},
+      // Zoom in and out with Alt+click
+      { src: 'libraries/frameworks/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Speaker notes
+      { src: 'libraries/frameworks/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Remote control your reveal.js presentation using a touch device
+      //{ src: 'libraries/frameworks/revealjs/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+  });
+  </script>  <!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+ 
+
+</html>
