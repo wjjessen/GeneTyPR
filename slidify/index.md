@@ -105,7 +105,7 @@ The Gene TyPR app (pronounced "Gene Typer", an acronym for Gene Type Parser) was
 2. Divide output into multiple independently viewable sections
 3. Allow for user-selected information to be exported
 
-Bioinformatics analysis often involves downloading and integrating public data from sites such as the National Center for Biotechnology Information (NCBI).
+Bioinformatics analysis often involves downloading and integrating public data from sites such as the National Center for Biotechnology Information (NCBI), part of the United States National Library of Medicine, a branch of the National Institutes of Health.
 
 http://www.ncbi.nlm.nih.gov/
 
